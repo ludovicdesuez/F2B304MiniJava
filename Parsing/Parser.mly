@@ -8,7 +8,7 @@
 %token <string> OTHERNAME
 
 %start fichier
-%type <MiniJavaAST.ast> fichier
+%type <MiniJavaAST.expr> fichier
 
 %%
 
@@ -17,16 +17,16 @@ fichier:
 ;
 
 file_content:
-| class_or_expr file_content {Controls($1,$2)}
-| class_or_expr {Control($1)}
+| class_or_expr file_content {List_expr($1,$2)}
+| class_or_expr {$1}
 
 class_or_expr:
 |classe {$1}
 ;
 
 classe:
-| CLASS CLASSNAME EXTENDS CLASSNAME LACCOLADE class_content RACCOLADE {Class($2, $4, $6)}
-| CLASS CLASSNAME LACCOLADE class_content RACCOLADE {Class($2, "Object", $4)}
+| CLASS CLASSNAME EXTENDS CLASSNAME LACCOLADE class_content RACCOLADE {Classe($2, $4, $6)}
+| CLASS CLASSNAME LACCOLADE class_content RACCOLADE {Classe($2, "Object", $4)}
 ;
 
 class_content:
