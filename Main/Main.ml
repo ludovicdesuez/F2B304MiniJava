@@ -25,7 +25,7 @@ let compile str =
     Location.init lexbuf file;
     print_endline "opening file";
     let t = Parser.fichier Lexer.nexttoken lexbuf in
-      print_endline (MiniJavaAST.string_of_Expr t);
+      print_endline (MiniJavaAST.string_of_Expr t 0);
   with Sys_error s ->
     print_endline ("Can't find file '" ^ file ^ "'")
 
