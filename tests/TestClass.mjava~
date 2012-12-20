@@ -1,0 +1,11 @@
+class MyClass extends MySuperClass{
+
+}
+
+class MyClass2 {
+
+}
+
+class MyClass {
+
+}
