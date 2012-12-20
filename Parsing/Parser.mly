@@ -13,25 +13,27 @@
 %%
 
 fichier:
-|file_content EOF {$1}
+|file_content EOF {Liste_expr($1)}
 ;
 
 file_content:
-| class_or_expr file_content {List_expr($1,$2)}
-| class_or_expr {$1}
+| class_or_expr file_content {$1::$2}
+| class_or_expr {[$1]}
 
 class_or_expr:
 |classe {$1}
 ;
 
 classe:
-| CLASS CLASSNAME EXTENDS CLASSNAME LACCOLADE class_content RACCOLADE {Classe($2, $4, $6)}
-| CLASS CLASSNAME LACCOLADE class_content RACCOLADE {Classe($2, "Object", $4)}
+| CLASS CLASSNAME EXTENDS CLASSNAME LACCOLADE RACCOLADE {Classe($2, $4, Liste_expr([]))}
+| CLASS CLASSNAME EXTENDS CLASSNAME LACCOLADE class_content RACCOLADE {Classe($2, $4, Liste_expr($6))}
+| CLASS CLASSNAME LACCOLADE RACCOLADE {Classe($2, "Object", Liste_expr([]))}
+| CLASS CLASSNAME LACCOLADE class_content RACCOLADE {Classe($2, "Object", Liste_expr($4))}
 ;
 
 class_content:
-| attr_or_method class_content {List_expr($1,$2)}
-| attr_or_method {$1}
+| attr_or_method class_content {$1::$2}
+| attr_or_method {[$1]}
 ;
 
 attr_or_method:
