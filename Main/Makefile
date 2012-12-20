@@ -1,6 +1,6 @@
 SOURCES= Main.ml
 
-DIRS= ../Utils ../Parsing ../Typing
+DIRS= ../Utils ../Parsing
 
 COMPFLAGS=
 
