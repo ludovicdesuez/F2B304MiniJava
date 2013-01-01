@@ -1,4 +1,4 @@
-for f in *.mjava
+for f in tests/*.mjava
 do
-	../minijavac $f | grep "error"
+	./minijavac $f | grep 'error\|File'
 done

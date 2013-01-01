@@ -24,8 +24,20 @@ let compile str =
     let lexbuf = Lexing.from_channel input_file in
     Location.init lexbuf file;
     print_endline "opening file";
-    let t = Parser.fichier Lexer.nexttoken lexbuf in
-      print_endline (MiniJavaAST.string_of_Expr t 0);
+    try
+      try
+	let t = Parser.fichier Lexer.nexttoken lexbuf in
+	print_endline (MiniJavaAST.string_of_Expr t 0);
+      with
+	| Parsing.Parse_error -> Error.syntax (Location.curr lexbuf)
+    with
+      | Error.Error (kind, loc) ->
+	close_in (input_file);
+	Error.report_error kind;
+	Location.print loc;
+	print_newline();
+	exit 0
+
   with Sys_error s ->
     print_endline ("Can't find file '" ^ file ^ "'")
 
