@@ -20,7 +20,7 @@ let integer = digit+
 
 let lineComment = "//"[^'\n']*
 let validMultiComment = "/*"_*"*/"
-let invalidMultiComment = "/*"_*eof
+let invalidMultiComment = "/*"((_ # '*')*('*'[^'/'])?)*eof
 
 
 rule nexttoken = parse
@@ -33,6 +33,8 @@ rule nexttoken = parse
   Location.incr_line_n lexbuf (StringManip.count_substring (Lexing.lexeme lexbuf) "\n");
   nexttoken lexbuf 
 }
+| invalidMultiComment { unterminated_comment (Location.curr lexbuf) }
+
 
 | "class"   { CLASS }
 | "extends" { EXTENDS }
