@@ -32,6 +32,8 @@ type expr =
 
   | DeclareAssign of string * string * expr * expr
   | Assign of string * expr
+  | MemberAssign of expr * string * expr
+  | StaticAssign of string * string * expr
 
   | New of string
 
@@ -43,6 +45,8 @@ type expr =
   | Param of string * string
 
   | Var of string
+  | MemberVar of expr * string
+  | StaticVar of string * string
 
   | Int of int
   | Bool of bool
@@ -102,6 +106,8 @@ string_of_Expr expr n =
 
     | DeclareAssign (vartype, varname, value, block) -> (getspace n) ^ varname ^":" ^ vartype ^ " = (" ^ (string_of_Expr value 0) ^ ")" ^ " in\n" ^  (string_of_Expr block (n+1))
     | Assign (var,e) -> (getspace n) ^ var ^ " = (" ^ (string_of_Expr(e) 0) ^ ")"
+    | MemberAssign (obj,var,e) -> (getspace n) ^ "(" ^ (string_of_Expr(obj) 0) ^ ")."^ var ^ " = (" ^ (string_of_Expr(e) 0) ^ ")"
+    | StaticAssign (c, var,e) -> (getspace n) ^ c ^ "." ^ var ^ " = (" ^ (string_of_Expr(e) 0) ^ ")"
 
     | New s -> (getspace n) ^ "new " ^ s
 
@@ -114,6 +120,8 @@ string_of_Expr expr n =
     | StaticCall (callee, methode, args) -> (getspace n) ^ callee ^ "." ^ methode ^ "(" ^ (string_of_list_expr args) ^ ")"
 
     | Var s -> (getspace n) ^ s
+    | MemberVar (obj,var) -> (getspace n) ^ "(" ^ (string_of_Expr obj 0) ^")." ^ var
+    | StaticVar (classe,var) -> (getspace n) ^ classe ^ "." ^ var
       
     | Int i -> (getspace n) ^ string_of_int(i)
     | Bool b -> (getspace n) ^ string_of_bool(b)

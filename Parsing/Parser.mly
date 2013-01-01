@@ -89,6 +89,8 @@ expr:
 | unop_expr {$1}
 | binop_expr {$1}
 
+| expr PERIOD OTHERNAME EQUALS expr {MemberAssign($1,$3,$5)}
+| CLASSNAME PERIOD OTHERNAME EQUALS expr {StaticAssign($1,$3,$5)}
 | OTHERNAME EQUALS expr {Assign($1,$3)}
 | CLASSNAME OTHERNAME EQUALS expr IN expr {DeclareAssign($1, $2, $4, $6)}
 
@@ -109,6 +111,8 @@ expr:
 | THIS {This}
 
 | OTHERNAME {Var($1)}
+| expr PERIOD OTHERNAME {MemberVar($1,$3)}
+| CLASSNAME PERIOD OTHERNAME {StaticVar($1,$3)}
 
 | INTEGER {Int($1)}
 | BOOLEAN {Bool($1)}
