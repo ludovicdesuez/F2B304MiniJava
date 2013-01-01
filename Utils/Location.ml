@@ -34,6 +34,11 @@ let incr_line lexbuf =
       pos_bol = pos.pos_cnum;
   }
 
+let rec incr_line_n lexbuf n =
+  incr_line lexbuf;
+  if (n > 1) then
+    incr_line_n lexbuf (n - 1)
+
 let symbol_loc () =
   {
     loc_start = Parsing.symbol_start_pos(); 

@@ -2,8 +2,12 @@
 open Parser
 open Error
 open Location
+open StringManip
 
 }
+
+let space = [' ' '\t']
+let newline = ("\010" | "\013" | "\013\010")
 
 let character = ['a'-'z' 'A'-'Z' '0'-'9' '_']
 let ShiftLetter = ['A'-'Z']
@@ -14,13 +18,21 @@ let className = ShiftLetter(character)*
 let otherName = NoShiftLetter(character)*
 let integer = digit+
 
-let space = [' ' '\t']
-let newline = ("\010" | "\013" | "\013\010")
+let lineComment = "//"[^'\n']*
+let validMultiComment = "/*"_*"*/"
+let invalidMultiComment = "/*"_*eof
+
 
 rule nexttoken = parse
 | space+ { nexttoken lexbuf }
 | newline { Location.incr_line lexbuf; nexttoken lexbuf }
 | eof { EOF }
+
+| lineComment { nexttoken lexbuf }
+| validMultiComment { 
+  Location.incr_line_n lexbuf (StringManip.count_substring (Lexing.lexeme lexbuf) "\n");
+  nexttoken lexbuf 
+}
 
 | "class" { CLASS }
 | "extends" {EXTENDS}
@@ -30,7 +42,11 @@ rule nexttoken = parse
 | "}" { RACCOLADE }
 | "(" { LPAR }
 | ")" { RPAR }
+
+| ":" {COLON}
 | ";" {SEMICOLON}
+| "," {COMMA}
+
 | "=" {EQUALS}
 
 | className { CLASSNAME(Lexing.lexeme lexbuf) }

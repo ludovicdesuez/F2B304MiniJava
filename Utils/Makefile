@@ -1,4 +1,4 @@
-SOURCES= Location.ml
+SOURCES= Location.ml StringManip.ml
 
 DIRS=
 

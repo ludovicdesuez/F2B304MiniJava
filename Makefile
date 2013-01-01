@@ -61,5 +61,5 @@ DIRS = Utils Parsing Main
 INCS = $(patsubst %,-I %, $(DIRS))
 
 # object files needed for linkage
-OBJS = MiniJavaAST.cmo Location.cmo Error.cmo Parser.cmo Lexer.cmo Main.cmo
+OBJS = str.cma MiniJavaAST.cmo Location.cmo StringManip.cmo Error.cmo Parser.cmo Lexer.cmo Main.cmo
 

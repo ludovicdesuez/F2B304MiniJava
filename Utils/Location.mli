@@ -11,6 +11,8 @@ val init : Lexing.lexbuf -> string -> unit
 val curr : Lexing.lexbuf -> t
 (* Incrémentation de la ligne du tampon *)
 val incr_line : Lexing.lexbuf -> unit
+(* Incrémentation de la ligne du tampon *)
+val incr_line_n : Lexing.lexbuf -> int -> unit
 (* La  position courante du symbole *)
 val symbol_loc : unit -> t
 (* La  position courante du nieme element de droite *)
