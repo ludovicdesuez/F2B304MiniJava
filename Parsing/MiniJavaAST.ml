@@ -36,6 +36,7 @@ type expr =
   | StaticAssign of string * string * expr
 
   | New of string
+  | InstanceOf of expr * string
 
   | If of expr * expr * expr
 
@@ -112,6 +113,7 @@ string_of_Expr expr n =
     | StaticAssign (c, var,e) -> (getspace n) ^ c ^ "." ^ var ^ " = (" ^ (string_of_Expr(e) 0) ^ ")"
 
     | New s -> (getspace n) ^ "new " ^ s
+    | InstanceOf (expr, classname) -> (getspace n) ^ "(" ^ (string_of_Expr expr 0) ^ ")" ^ " is? " ^ classname
 
     | If (condition, thenExp, NoExpr) -> (getspace n) ^ "if (" ^ (string_of_Expr condition 0) ^ ")\n" ^ (string_of_Expr thenExp (n+1))
     | If (condition, thenExp, elseExp) -> (getspace n) ^ "if (" ^ (string_of_Expr condition 0) ^ ")\n" ^ (string_of_Expr thenExp (n+1)) ^ "\n" ^ (getspace n) ^ "else\n" ^ (string_of_Expr elseExp (n+1))

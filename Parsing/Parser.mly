@@ -22,6 +22,7 @@
 
 %left SEMICOLON
 %left EQUALS
+%left INSTANCEOF
 %left OR
 %left AND
 %left COMP_EQ, COMP_DIFF
@@ -95,6 +96,7 @@ expr:
 | CLASSNAME OTHERNAME EQUALS expr IN expr {DeclareAssign($1, $2, $4, $6)}
 
 | NEW CLASSNAME {New($2)}
+| expr INSTANCEOF CLASSNAME {InstanceOf($1,$3)}
 
 | IF LPAR expr RPAR LACCOLADE expr RACCOLADE {If($3, $6, NoExpr)}
 | IF LPAR expr RPAR LACCOLADE expr RACCOLADE ELSE LACCOLADE expr RACCOLADE {If($3, $6, $10)}
