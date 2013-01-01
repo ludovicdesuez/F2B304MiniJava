@@ -98,6 +98,9 @@ expr:
 | expr PERIOD OTHERNAME LPAR RPAR {Call($1,$3,[])}
 | expr PERIOD OTHERNAME LPAR args RPAR {Call($1,$3,$5)}
 
+| CLASSNAME PERIOD OTHERNAME LPAR RPAR {StaticCall($1,$3,[])}
+| CLASSNAME PERIOD OTHERNAME LPAR args RPAR {StaticCall($1,$3,$5)}
+
 | LPAR expr RPAR {$2}
 
 | NULL {Null}

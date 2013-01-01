@@ -36,6 +36,7 @@ type expr =
   | If of expr * expr * expr
 
   | Call of expr * string * expr list
+  | StaticCall of string * string * expr list
 
   | Param of string * string
 
@@ -106,6 +107,7 @@ string_of_Expr expr n =
     | Param (t,name) -> (getspace n) ^ name ^ ":" ^ t
 
     | Call (callee, methode, args) -> (getspace n) ^ (string_of_Expr callee 0) ^ "." ^ methode ^ "(" ^ (string_of_list_expr args) ^ ")"
+    | StaticCall (callee, methode, args) -> (getspace n) ^ callee ^ "." ^ methode ^ "(" ^ (string_of_list_expr args) ^ ")"
 
     | Var s -> (getspace n) ^ s
       
