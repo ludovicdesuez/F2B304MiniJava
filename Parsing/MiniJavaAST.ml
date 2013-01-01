@@ -25,6 +25,8 @@ type expr =
   | Division of expr * expr
   | Modulo of expr * expr
 
+  | Sequence of expr * expr
+
   | And of expr * expr
   | Or of expr * expr
 
@@ -79,6 +81,8 @@ let rec string_of_Expr expr n =
 
     | And (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") && (" ^ (string_of_Expr(e2) 0) ^ ")"
     | Or (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") || (" ^ (string_of_Expr(e2) 0) ^ ")"
+
+    | Sequence (e1,e2) -> (string_of_Expr(e1) n) ^ ";\n" ^ (string_of_Expr(e2) n)
 
     | DeclareAssign (vartype, varname, value, block) -> (getspace n) ^ varname ^":" ^ vartype ^ " = (" ^ (string_of_Expr value 0) ^ ")" ^ "in\n" ^  (string_of_Expr block (n+1))
     | Assign (var,e) -> (getspace n) ^ var ^ " = (" ^ (string_of_Expr(e) 0) ^ ")"

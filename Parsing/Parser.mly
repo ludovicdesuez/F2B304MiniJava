@@ -20,6 +20,7 @@
 %token <int> INTEGER
 %token <bool> BOOLEAN
 
+%left SEMICOLON
 %left EQUALS
 %left OR
 %left AND
@@ -123,6 +124,8 @@ binop_expr:
 
 | expr AND expr {And($1,$3)}
 | expr OR expr {Or($1,$3)}
+
+| expr SEMICOLON expr {Sequence($1,$3)}
 ;
 
 %%
