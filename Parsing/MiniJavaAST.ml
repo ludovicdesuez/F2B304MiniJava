@@ -55,21 +55,21 @@ let rec string_of_Expr expr n =
     | Static_attr (typ,name,e) -> (getspace n) ^ "static Attribut " ^ name ^ ":" ^ typ ^ " \n" ^ (string_of_Expr e (n+1))
     | Attr (typ,name,e) -> (getspace n) ^ "Attribut " ^ name ^ ":" ^ typ ^ " \n" ^ (string_of_Expr e (n+1))
 
-    | Negat e -> (getspace n) ^ "- " ^ (string_of_Expr(e) 0)
-    | Not e -> (getspace n) ^ "! " ^ (string_of_Expr(e) 0)
+    | Negat e -> (getspace n) ^ "-(" ^ (string_of_Expr(e) 0) ^ ")"
+    | Not e -> (getspace n) ^ "!(" ^ (string_of_Expr(e) 0) ^ ")"
 
-    | CompSupEq (e1,e2) -> (getspace n) ^ (string_of_Expr(e1) 0) ^ " >= (" ^ (string_of_Expr(e2) 0) ^ ")"
-    | CompSup (e1,e2) -> (getspace n) ^ (string_of_Expr(e1) 0) ^ " > (" ^ (string_of_Expr(e2) 0) ^ ")"
-    | CompInfEq (e1,e2) -> (getspace n) ^ (string_of_Expr(e1) 0) ^ " <= (" ^ (string_of_Expr(e2) 0) ^ ")"
-    | CompInf (e1,e2) -> (getspace n) ^ (string_of_Expr(e1) 0) ^ " < (" ^ (string_of_Expr(e2) 0) ^ ")"
-    | CompEq (e1,e2) -> (getspace n) ^ (string_of_Expr(e1) 0) ^ " == (" ^ (string_of_Expr(e2) 0) ^ ")"
-    | CompDiff (e1,e2) -> (getspace n) ^ (string_of_Expr(e1) 0) ^ " != (" ^ (string_of_Expr(e2) 0) ^ ")"
+    | CompSupEq (e1,e2) -> (getspace n) ^ "(" ^ (string_of_Expr(e1) 0) ^ ") >= (" ^ (string_of_Expr(e2) 0) ^ ")"
+    | CompSup (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") > (" ^ (string_of_Expr(e2) 0) ^ ")"
+    | CompInfEq (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") <= (" ^ (string_of_Expr(e2) 0) ^ ")"
+    | CompInf (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") < (" ^ (string_of_Expr(e2) 0) ^ ")"
+    | CompEq (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") == (" ^ (string_of_Expr(e2) 0) ^ ")"
+    | CompDiff (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") != (" ^ (string_of_Expr(e2) 0) ^ ")"
 
-    | Addition (e1,e2) -> (getspace n) ^ (string_of_Expr(e1) 0) ^ " + (" ^ (string_of_Expr(e2) 0) ^ ")"
-    | Substraction (e1,e2) -> (getspace n) ^ (string_of_Expr(e1) 0) ^ " - (" ^ (string_of_Expr(e2) 0) ^ ")"
-    | Multiplication (e1,e2) -> (getspace n) ^ (string_of_Expr(e1) 0) ^ " * (" ^ (string_of_Expr(e2) 0) ^ ")"
-    | Division (e1,e2) -> (getspace n) ^ (string_of_Expr(e1) 0) ^ " / (" ^ (string_of_Expr(e2) 0) ^ ")"
-    | Modulo (e1,e2) -> (getspace n) ^ (string_of_Expr(e1) 0) ^ " % (" ^ (string_of_Expr(e2) 0) ^ ")"
+    | Addition (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") + (" ^ (string_of_Expr(e2) 0) ^ ")"
+    | Substraction (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") - (" ^ (string_of_Expr(e2) 0) ^ ")"
+    | Multiplication (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") * (" ^ (string_of_Expr(e2) 0) ^ ")"
+    | Division (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") / (" ^ (string_of_Expr(e2) 0) ^ ")"
+    | Modulo (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") % (" ^ (string_of_Expr(e2) 0) ^ ")"
 
 
     | Param (t,name) -> (getspace n) ^ t ^ ":" ^ name

@@ -20,6 +20,16 @@
 %token <int> INTEGER
 %token <bool> BOOLEAN
 
+%left EQUALS
+%left OR
+%left AND
+%left COMP_EQ, COMP_DIFF
+%left COMP_SUP, COMP_INF, COMP_SUPEQ, COMP_INFEQ
+%left PLUS, MINUS
+%left MULTIPLY, DIVIDE, MODULO
+%left EXCLAMATION
+%left LACCOLADE, RACCOLADE, LPAR, RPAR, PERIOD
+
 %start fichier
 %type <MiniJavaAST.expr> fichier
 
