@@ -60,6 +60,10 @@ rule nexttoken = parse
 | "-" {MINUS}
 | "*" {MULTIPLY}
 | "/" {DIVIDE}
+| "%" {MODULO}
+
+| "&&" {AND}
+| "||" {OR}
 
 | "=" {EQUALS}
 
