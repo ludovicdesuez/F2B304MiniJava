@@ -76,6 +76,7 @@ params:
 
 expr:
 | unop_expr {$1}
+| binop_expr {$1}
 
 | LPAR expr RPAR {$2}
 
@@ -91,6 +92,15 @@ expr:
 unop_expr:
 | MINUS expr {Negat($2)}
 | EXCLAMATION expr {Not($2)}
+;
+
+binop_expr:
+| expr COMP_SUPEQ expr {CompSupEq($1,$3)}
+| expr COMP_SUP expr {CompSup($1,$3)}
+| expr COMP_INFEQ expr {CompInfEq($1,$3)}
+| expr COMP_INF expr {CompInf($1,$3)}
+| expr COMP_EQ expr {CompEq($1,$3)}
+| expr COMP_DIFF expr {CompDiff($1,$3)}
 ;
 
 %%
