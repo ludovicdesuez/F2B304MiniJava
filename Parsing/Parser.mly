@@ -101,6 +101,11 @@ binop_expr:
 | expr COMP_INF expr {CompInf($1,$3)}
 | expr COMP_EQ expr {CompEq($1,$3)}
 | expr COMP_DIFF expr {CompDiff($1,$3)}
+| expr PLUS expr {Addition($1,$3)}
+| expr MINUS expr {Substraction($1,$3)}
+| expr MULTIPLY expr {Multiplication($1,$3)}
+| expr DIVIDE expr {Division($1,$3)}
+| expr MODULO expr {Modulo($1,$3)}
 ;
 
 %%
