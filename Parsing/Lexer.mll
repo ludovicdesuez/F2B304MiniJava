@@ -42,6 +42,12 @@ rule nexttoken = parse
 | "else" { ELSE }
 | "in"   { IN }
 
+| "null"   { NULL }
+| "this" { THIS }
+
+| "instanceof"   { INSTANCEOF }
+| "new" { NEW }
+
 | "{" { LACCOLADE }
 | "}" { RACCOLADE }
 | "(" { LPAR }

@@ -10,6 +10,8 @@
 %token COMP_SUP, COMP_INF, COMP_SUPEQ, COMP_INFEQ, COMP_EQ, COMP_DIFF
 %token STATIC, CLASS, EXTENDS
 %token IF, ELSE, IN
+%token THIS, NULL
+%token INSTANCEOF, NEW
 %token EOF
 
 %token <string> CLASSNAME
