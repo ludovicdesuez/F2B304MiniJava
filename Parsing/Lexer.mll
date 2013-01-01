@@ -47,6 +47,13 @@ rule nexttoken = parse
 | ";" {SEMICOLON}
 | "," {COMMA}
 
+| "<=" {COMP_INFEQ}
+| ">=" {COMP_SUPEQ}
+| "!=" {COMP_DIFF}
+| "==" {COMP_EQ}
+| "<"  {COMP_INF}
+| ">"  {COMP_SUP}
+
 | "=" {EQUALS}
 
 | className { CLASSNAME(Lexing.lexeme lexbuf) }
