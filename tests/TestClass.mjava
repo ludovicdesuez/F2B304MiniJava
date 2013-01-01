@@ -7,12 +7,13 @@ class MyClass extends MySuperClass{
 	   Always.
 	*/
 	static Int getQuatorze () {
-		14
+		Int result = 10 in
+			result = result + 4 ;
+			result
 	}
 
-
 	Boolean isEven (Int n) {
-		true
+		(n % 2 == 0) && true || false
 	}
 }
 
