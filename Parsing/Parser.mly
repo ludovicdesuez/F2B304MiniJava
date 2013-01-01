@@ -76,6 +76,7 @@ params:
 
 expr:
 | LPAR expr RPAR {$2}
+| OTHERNAME {Var($1)}
 | INTEGER {Int($1)}
 | BOOLEAN {Bool($1)}
 ;
