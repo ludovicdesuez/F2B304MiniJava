@@ -28,6 +28,9 @@ type expr =
   | And of expr * expr
   | Or of expr * expr
 
+  | DeclareAssign of string * string * expr * expr
+  | Assign of string * expr
+
   | Param of string * string
 
   | Var of string
@@ -76,6 +79,9 @@ let rec string_of_Expr expr n =
 
     | And (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") && (" ^ (string_of_Expr(e2) 0) ^ ")"
     | Or (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") || (" ^ (string_of_Expr(e2) 0) ^ ")"
+
+    | DeclareAssign (vartype, varname, value, block) -> (getspace n) ^ varname ^":" ^ vartype ^ " = (" ^ (string_of_Expr value 0) ^ ")" ^ "in\n" ^  (string_of_Expr block (n+1))
+    | Assign (var,e) -> (getspace n) ^ var ^ " = (" ^ (string_of_Expr(e) 0) ^ ")"
 
 
     | Param (t,name) -> (getspace n) ^ t ^ ":" ^ name

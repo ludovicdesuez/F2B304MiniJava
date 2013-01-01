@@ -88,6 +88,9 @@ expr:
 | unop_expr {$1}
 | binop_expr {$1}
 
+| OTHERNAME EQUALS expr {Assign($1,$3)}
+| CLASSNAME OTHERNAME EQUALS expr IN expr {DeclareAssign($1, $2, $4, $6)}
+
 | LPAR expr RPAR {$2}
 
 | NULL {Null}
