@@ -18,6 +18,7 @@
 %token <string> OTHERNAME
 
 %token <int> INTEGER
+%token <bool> BOOLEAN
 
 %start fichier
 %type <MiniJavaAST.expr> fichier
@@ -76,5 +77,6 @@ params:
 expr:
 | LPAR expr RPAR {$2}
 | INTEGER {Int($1)}
+| BOOLEAN {Bool($1)}
 ;
 %%

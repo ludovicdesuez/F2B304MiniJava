@@ -1,4 +1,18 @@
+// This is a test case
 class MyClass extends MySuperClass{
-static Int myint;
+	static Int myint;
+	Int myotherint = 14;
+
+	/* This method return 14.
+	   Always.
+	*/
+	static Int getQuatorze () {
+		14
+	}
+
+
+	Boolean isEven (Int n) {
+		true
+	}
 }
 

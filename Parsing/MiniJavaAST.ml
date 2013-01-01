@@ -12,6 +12,7 @@ type expr =
   | Param of string * string
 
   | Int of int
+  | Bool of bool
 
   | NoExpr
 
@@ -36,5 +37,6 @@ let rec string_of_Expr expr n =
     | Param (t,name) -> (getspace n) ^ t ^ ":" ^ name
 
     | Int i -> (getspace n) ^ string_of_int(i)
+    | Bool b -> (getspace n) ^ string_of_bool(b)
 
     | NoExpr -> ""

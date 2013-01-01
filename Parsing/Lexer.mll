@@ -48,6 +48,9 @@ rule nexttoken = parse
 | "instanceof"   { INSTANCEOF }
 | "new" { NEW }
 
+| "true"  {BOOLEAN(true)}
+| "false" {BOOLEAN(false)}
+
 | "{" { LACCOLADE }
 | "}" { RACCOLADE }
 | "(" { LPAR }
