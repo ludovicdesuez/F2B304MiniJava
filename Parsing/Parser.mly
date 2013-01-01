@@ -107,6 +107,8 @@ expr:
 
 | LPAR expr RPAR {$2}
 
+| LPAR CLASSNAME RPAR expr {Cast($2,$4)}
+
 | NULL {Null}
 | THIS {This}
 

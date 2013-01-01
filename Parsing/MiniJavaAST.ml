@@ -48,6 +48,8 @@ type expr =
   | MemberVar of expr * string
   | StaticVar of string * string
 
+  | Cast of string * expr
+
   | Int of int
   | Bool of bool
 
@@ -122,6 +124,8 @@ string_of_Expr expr n =
     | Var s -> (getspace n) ^ s
     | MemberVar (obj,var) -> (getspace n) ^ "(" ^ (string_of_Expr obj 0) ^")." ^ var
     | StaticVar (classe,var) -> (getspace n) ^ classe ^ "." ^ var
+
+    | Cast (typename, expr) -> (getspace n) ^ "(" ^ typename ^ "<-" ^ (string_of_Expr expr 0) ^ ")"
       
     | Int i -> (getspace n) ^ string_of_int(i)
     | Bool b -> (getspace n) ^ string_of_bool(b)
