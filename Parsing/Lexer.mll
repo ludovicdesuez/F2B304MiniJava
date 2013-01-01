@@ -34,9 +34,13 @@ rule nexttoken = parse
   nexttoken lexbuf 
 }
 
-| "class" { CLASS }
-| "extends" {EXTENDS}
-| "static" {STATIC}
+| "class"   { CLASS }
+| "extends" { EXTENDS }
+| "static"  { STATIC }
+
+| "if"   { IF }
+| "else" { ELSE }
+| "in"   { IN }
 
 | "{" { LACCOLADE }
 | "}" { RACCOLADE }
