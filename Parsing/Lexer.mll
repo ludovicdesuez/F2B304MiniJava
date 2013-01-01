@@ -43,16 +43,18 @@ rule nexttoken = parse
 | "(" { LPAR }
 | ")" { RPAR }
 
-| ":" {COLON}
-| ";" {SEMICOLON}
-| "," {COMMA}
-
 | "<=" {COMP_INFEQ}
 | ">=" {COMP_SUPEQ}
 | "!=" {COMP_DIFF}
 | "==" {COMP_EQ}
 | "<"  {COMP_INF}
 | ">"  {COMP_SUP}
+
+| "!" {EXCLAMATION}
+| ":" {COLON}
+| ";" {SEMICOLON}
+| "," {COMMA}
+| "," {PERIOD}
 
 | "=" {EQUALS}
 
