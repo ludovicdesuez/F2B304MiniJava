@@ -92,6 +92,8 @@ expr:
 | OTHERNAME EQUALS expr {Assign($1,$3)}
 | CLASSNAME OTHERNAME EQUALS expr IN expr {DeclareAssign($1, $2, $4, $6)}
 
+| NEW CLASSNAME {New($2)}
+
 | IF LPAR expr RPAR LACCOLADE expr RACCOLADE {If($3, $6, NoExpr)}
 | IF LPAR expr RPAR LACCOLADE expr RACCOLADE ELSE LACCOLADE expr RACCOLADE {If($3, $6, $10)}
 

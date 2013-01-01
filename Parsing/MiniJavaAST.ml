@@ -33,6 +33,8 @@ type expr =
   | DeclareAssign of string * string * expr * expr
   | Assign of string * expr
 
+  | New of string
+
   | If of expr * expr * expr
 
   | Call of expr * string * expr list
@@ -100,6 +102,8 @@ string_of_Expr expr n =
 
     | DeclareAssign (vartype, varname, value, block) -> (getspace n) ^ varname ^":" ^ vartype ^ " = (" ^ (string_of_Expr value 0) ^ ")" ^ " in\n" ^  (string_of_Expr block (n+1))
     | Assign (var,e) -> (getspace n) ^ var ^ " = (" ^ (string_of_Expr(e) 0) ^ ")"
+
+    | New s -> (getspace n) ^ "new " ^ s
 
     | If (condition, thenExp, NoExpr) -> (getspace n) ^ "if (" ^ (string_of_Expr condition 0) ^ ")\n" ^ (string_of_Expr thenExp (n+1))
     | If (condition, thenExp, elseExp) -> (getspace n) ^ "if (" ^ (string_of_Expr condition 0) ^ ")\n" ^ (string_of_Expr thenExp (n+1)) ^ "\n" ^ (getspace n) ^ "else\n" ^ (string_of_Expr elseExp (n+1))
