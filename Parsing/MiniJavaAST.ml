@@ -16,6 +16,9 @@ type expr =
   | Int of int
   | Bool of bool
 
+  | Null
+  | This
+
   | NoExpr
 
 let rec getspace n=
@@ -42,5 +45,8 @@ let rec string_of_Expr expr n =
       
     | Int i -> (getspace n) ^ string_of_int(i)
     | Bool b -> (getspace n) ^ string_of_bool(b)
+
+    | Null -> (getspace n) ^ "null"
+    | This -> (getspace n) ^ "this"
 
     | NoExpr -> ""
