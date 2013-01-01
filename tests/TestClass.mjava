@@ -8,12 +8,27 @@ class MyClass extends MySuperClass{
 	*/
 	static Int getQuatorze () {
 		Int result = 10 in
-			result = result + 4 ;
-			result
+			MyClass bobo = new MyClass in
+				if (!((MyClass)bobo).isEven(result)) {
+					result = result + 4
+				} ;
+				result
 	}
 
 	Boolean isEven (Int n) {
-		(n % 2 == 0) && true || false
+		if (n > 0) {
+			(n % 2 == 0) && true || false;
+			this.myotherint = n;
+			if (this instanceof MySuperClass) {
+				MyClass.myint = n/2
+			}
+		} else {
+			Boolean result = false in
+				if (n == 0) {
+					result = true
+				};
+				result
+		}
 	}
 }
 
