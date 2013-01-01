@@ -54,7 +54,12 @@ rule nexttoken = parse
 | ":" {COLON}
 | ";" {SEMICOLON}
 | "," {COMMA}
-| "," {PERIOD}
+| "." {PERIOD}
+
+| "+" {PLUS}
+| "-" {MINUS}
+| "*" {MULTIPLY}
+| "/" {DIVIDE}
 
 | "=" {EQUALS}
 
