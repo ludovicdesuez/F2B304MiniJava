@@ -9,6 +9,9 @@ type expr =
   | Static_method of string * string * expr list * expr
   | Method of string * string * expr list * expr
 
+  | Negat of expr
+  | Not of expr
+
   | Param of string * string
 
   | Var of string
@@ -38,6 +41,9 @@ let rec string_of_Expr expr n =
 
     | Static_attr (typ,name,e) -> (getspace n) ^ "static Attribut " ^ name ^ ":" ^ typ ^ " \n" ^ (string_of_Expr e (n+1))
     | Attr (typ,name,e) -> (getspace n) ^ "Attribut " ^ name ^ ":" ^ typ ^ " \n" ^ (string_of_Expr e (n+1))
+
+    | Negat e -> (getspace n) ^ "- " ^ (string_of_Expr(e) 0)
+    | Not e -> (getspace n) ^ "! " ^ (string_of_Expr(e) 0)
 
     | Param (t,name) -> (getspace n) ^ t ^ ":" ^ name
 

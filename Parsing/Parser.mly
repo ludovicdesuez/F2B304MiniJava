@@ -75,6 +75,8 @@ params:
 ;
 
 expr:
+| unop_expr {$1}
+
 | LPAR expr RPAR {$2}
 
 | NULL {Null}
@@ -85,4 +87,10 @@ expr:
 | INTEGER {Int($1)}
 | BOOLEAN {Bool($1)}
 ;
+
+unop_expr:
+| MINUS expr {Negat($2)}
+| EXCLAMATION expr {Not($2)}
+;
+
 %%
