@@ -25,6 +25,9 @@ type expr =
   | Division of expr * expr
   | Modulo of expr * expr
 
+  | And of expr * expr
+  | Or of expr * expr
+
   | Param of string * string
 
   | Var of string
@@ -70,6 +73,9 @@ let rec string_of_Expr expr n =
     | Multiplication (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") * (" ^ (string_of_Expr(e2) 0) ^ ")"
     | Division (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") / (" ^ (string_of_Expr(e2) 0) ^ ")"
     | Modulo (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") % (" ^ (string_of_Expr(e2) 0) ^ ")"
+
+    | And (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") && (" ^ (string_of_Expr(e2) 0) ^ ")"
+    | Or (e1,e2) -> (getspace n) ^  "(" ^ (string_of_Expr(e1) 0) ^ ") || (" ^ (string_of_Expr(e2) 0) ^ ")"
 
 
     | Param (t,name) -> (getspace n) ^ t ^ ":" ^ name
