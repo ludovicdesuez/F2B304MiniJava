@@ -35,6 +35,8 @@ type expr =
 
   | If of expr * expr * expr
 
+  | Call of expr * string * expr list
+
   | Param of string * string
 
   | Var of string
@@ -47,20 +49,29 @@ type expr =
 
   | NoExpr
 
+
 let rec getspace n=
   if n>0
   then "  " ^ (getspace (n-1))
   else ""
 
-let rec string_of_Expr expr n =
+let rec string_of_list_expr l =
+  match l with
+    | [] -> ""
+    | [a] -> string_of_Expr a 0
+    | t::q -> (string_of_Expr t 0) ^ (string_of_list_expr q)
+
+and
+
+string_of_Expr expr n =
   match expr  with
     | Liste_expr([])  -> ""
     | Liste_expr(t::q)  -> (string_of_Expr t n) ^ "\n" ^ (string_of_Expr (Liste_expr(q)) n)
 
     | Classe (name,parent, e) -> (getspace n) ^ "Class " ^ name ^ ":" ^ parent  ^ "\n"^ (string_of_Expr e (n+1))
 
-    | Static_method (typ,name,params,e) -> (getspace n) ^ "static Method " ^ name ^ ":" ^ typ ^ "\n" ^ (string_of_Expr (Liste_expr(params)) (n+1)) ^ "\n" ^ (string_of_Expr e (n+1))
-    | Method (typ,name,params,e) -> (getspace n) ^ "Method " ^ name ^ ":" ^ typ ^ "\n" ^ (string_of_Expr (Liste_expr(params)) (n+1)) ^ "\n" ^ (string_of_Expr e (n+1))
+    | Static_method (typ,name,params,e) -> (getspace n) ^ "static Method " ^ name ^ ":" ^ typ ^ " ( " ^ (string_of_list_expr params) ^ ")\n" ^ (string_of_Expr e (n+1))
+    | Method (typ,name,params,e) -> (getspace n) ^ "Method " ^ name ^ ":" ^ typ ^ " ( " ^ (string_of_list_expr params) ^ " )\n" ^ (string_of_Expr e (n+1))
 
     | Static_attr (typ,name,e) -> (getspace n) ^ "static Attribut " ^ name ^ ":" ^ typ ^ " \n" ^ (string_of_Expr e (n+1))
     | Attr (typ,name,e) -> (getspace n) ^ "Attribut " ^ name ^ ":" ^ typ ^ " \n" ^ (string_of_Expr e (n+1))
@@ -86,13 +97,15 @@ let rec string_of_Expr expr n =
 
     | Sequence (e1,e2) -> (string_of_Expr(e1) n) ^ ";\n" ^ (string_of_Expr(e2) n)
 
-    | DeclareAssign (vartype, varname, value, block) -> (getspace n) ^ varname ^":" ^ vartype ^ " = (" ^ (string_of_Expr value 0) ^ ")" ^ "in\n" ^  (string_of_Expr block (n+1))
+    | DeclareAssign (vartype, varname, value, block) -> (getspace n) ^ varname ^":" ^ vartype ^ " = (" ^ (string_of_Expr value 0) ^ ")" ^ " in\n" ^  (string_of_Expr block (n+1))
     | Assign (var,e) -> (getspace n) ^ var ^ " = (" ^ (string_of_Expr(e) 0) ^ ")"
 
     | If (condition, thenExp, NoExpr) -> (getspace n) ^ "if (" ^ (string_of_Expr condition 0) ^ ")\n" ^ (string_of_Expr thenExp (n+1))
     | If (condition, thenExp, elseExp) -> (getspace n) ^ "if (" ^ (string_of_Expr condition 0) ^ ")\n" ^ (string_of_Expr thenExp (n+1)) ^ "\n" ^ (getspace n) ^ "else\n" ^ (string_of_Expr elseExp (n+1))
 
-    | Param (t,name) -> (getspace n) ^ t ^ ":" ^ name
+    | Param (t,name) -> (getspace n) ^ name ^ ":" ^ t
+
+    | Call (callee, methode, args) -> (getspace n) ^ (string_of_Expr callee 0) ^ "." ^ methode ^ "(" ^ (string_of_list_expr args) ^ ")"
 
     | Var s -> (getspace n) ^ s
       

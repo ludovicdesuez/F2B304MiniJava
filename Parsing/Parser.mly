@@ -95,6 +95,9 @@ expr:
 | IF LPAR expr RPAR LACCOLADE expr RACCOLADE {If($3, $6, NoExpr)}
 | IF LPAR expr RPAR LACCOLADE expr RACCOLADE ELSE LACCOLADE expr RACCOLADE {If($3, $6, $10)}
 
+| expr PERIOD OTHERNAME LPAR RPAR {Call($1,$3,[])}
+| expr PERIOD OTHERNAME LPAR args RPAR {Call($1,$3,$5)}
+
 | LPAR expr RPAR {$2}
 
 | NULL {Null}
@@ -130,5 +133,9 @@ binop_expr:
 
 | expr SEMICOLON expr {Sequence($1,$3)}
 ;
+
+args:
+| expr COMMA args {$1::$3}
+| expr {[$1]}
 
 %%
