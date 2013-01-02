@@ -1,8 +1,10 @@
 {
+
 open Parser
 open Error
 open Location
 open StringManip
+open StringParsingTool
 
 }
 
@@ -21,6 +23,9 @@ let integer = digit+
 let lineComment = "//"[^'\n']*
 let validMultiComment = "/*"_*"*/"
 let invalidMultiComment = "/*"((_ # '*')*('*'[^'/'])?)*eof
+
+let validString = '"'(_ # '"')*'"'
+let invalidString = '"'[^'"']eof
 
 
 rule nexttoken = parse
@@ -81,6 +86,9 @@ rule nexttoken = parse
 | "||" {OR}
 
 | "=" {EQUALS}
+
+| validString {STRING(parse_string (Lexing.lexeme lexbuf)) }
+| invalidString  { Error.unterminated_string (Location.curr lexbuf) }
 
 | className { CLASSNAME(Lexing.lexeme lexbuf) }
 | otherName { OTHERNAME(Lexing.lexeme lexbuf)}

@@ -12,3 +12,5 @@ Lexer.ml
 Parser.ml
 Parser.mli
 minijavac
+StringParser.mli
+StringLexer.ml

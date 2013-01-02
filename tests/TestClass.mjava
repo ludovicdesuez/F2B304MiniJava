@@ -30,5 +30,10 @@ class MyClass extends MySuperClass{
 				result
 		}
 	}
+
+	String toString() {
+		"My class \\ MySuperClass\n
+		is so awesome! \qYes it is\q"
+	}
 }
 

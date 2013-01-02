@@ -1,7 +1,7 @@
 
-SOURCES= Error.ml MiniJavaAST.ml Parser.ml Lexer.mll 
+SOURCES= MiniJavaAST.ml Parser.ml Lexer.mll 
 
-DIRS=../Utils
+DIRS=../Utils ../StringParsing
 
 COMPFLAGS=
 

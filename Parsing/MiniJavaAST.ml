@@ -53,6 +53,7 @@ type expr =
 
   | Int of int
   | Bool of bool
+  | String of string
 
   | Null
   | This
@@ -131,6 +132,7 @@ string_of_Expr expr n =
       
     | Int i -> (getspace n) ^ string_of_int(i)
     | Bool b -> (getspace n) ^ string_of_bool(b)
+    | String s -> (getspace n) ^ "\"" ^ s ^ "\""
 
     | Null -> (getspace n) ^ "null"
     | This -> (getspace n) ^ "this"

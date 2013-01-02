@@ -55,11 +55,11 @@ depend:
 
 
 # directories to go in (they must be in the good dependency order!!)
-DIRS = Utils Parsing Main
+DIRS = Utils StringParsing Parsing Main
 
 # -I directives for linkage
 INCS = $(patsubst %,-I %, $(DIRS))
 
 # object files needed for linkage
-OBJS = str.cma MiniJavaAST.cmo Location.cmo StringManip.cmo Error.cmo Parser.cmo Lexer.cmo Main.cmo
+OBJS = str.cma MiniJavaAST.cmo Location.cmo StringManip.cmo Error.cmo StringParser.cmo StringLexer.cmo StringParsingTool.cmo Parser.cmo Lexer.cmo Main.cmo
 

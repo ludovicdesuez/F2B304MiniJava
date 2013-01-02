@@ -19,6 +19,7 @@
 
 %token <int> INTEGER
 %token <bool> BOOLEAN
+%token <string> STRING
 
 %left SEMICOLON
 %left EQUALS
@@ -120,6 +121,7 @@ expr:
 
 | INTEGER {Int($1)}
 | BOOLEAN {Bool($1)}
+| STRING  {String($1)}
 ;
 
 unop_expr:
